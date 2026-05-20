@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foodie Hub - Indian Restaurant</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+            scroll-behavior:smooth;
+        }
+
+        body{
+            background:#fffaf5;
+            overflow-x:hidden;
+        }
+
+        /* NAVBAR */
+
+        nav{
+
+            background:#111;
+
+            padding:18px 8%;
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            position:sticky;
+
+            top:0;
+
+            z-index:1000;
+        }
+
+        nav h1{
+
+            color:#ffb347;
+
+            font-size:35px;
+        }
+
+        nav ul{
+
+            display:flex;
+
+            gap:25px;
+
+            list-style:none;
+        }
+
+        nav ul li a{
+
+            text-decoration:none;
+
+            color:white;
+
+            transition:0.3s;
+        }
+
+        nav ul li a:hover{
+
+            color:#ffb347;
+        }
+
+        /* HERO SECTION */
+
+        .hero{
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            gap:60px;
+
+            padding:40px 8%;
+
+            flex-wrap:wrap;
+
+            background:#fffaf5;
+        }
+
+        .hero-text{
+
+            flex:1;
+
+            min-width:300px;
+        }
+
+        .hero-text h1{
+
+            font-size:70px;
+
+            color:#222;
+
+            margin-bottom:20px;
+        }
+
+        .hero-text p{
+
+            font-size:20px;
+
+            color:#555;
+
+            line-height:1.8;
+
+            margin-bottom:30px;
+        }
+
+        .hero-text button{
+
+            padding:15px 35px;
+
+            border:none;
+
+            background:#ff7b00;
+
+            color:white;
+
+            font-size:18px;
+
+            border-radius:50px;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        .hero-text button:hover{
+
+            background:#e56700;
+
+            transform:scale(1.05);
+        }
+
+        /* BUTTONS */
+
+        .buttons{
+
+            margin-top:30px;
+
+            display:flex;
+
+            gap:15px;
+
+            flex-wrap:wrap;
+        }
+
+        .buttons button{
+
+            padding:12px 24px;
+
+            border:none;
+
+            border-radius:40px;
+
+            background:#222;
+
+            color:white;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        .buttons button:hover{
+
+            background:#ff7b00;
+        }
+
+        /* POPUPS */
+
+        .popup{
+
+            display:none;
+
+            margin-top:15px;
+
+            background:white;
+
+            padding:20px;
+
+            border-radius:20px;
+
+            box-shadow:0 8px 20px rgba(0,0,0,0.1);
+
+            width:320px;
+
+            animation:fadeIn 0.4s ease;
+        }
+
+        .popup h3{
+
+            margin-bottom:12px;
+
+            color:#ff7b00;
+        }
+
+        .popup p{
+
+            color:#555;
+
+            margin-bottom:8px;
+
+            line-height:1.6;
+        }
+
+        @keyframes fadeIn{
+
+            from{
+                opacity:0;
+                transform:translateY(15px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        /* IMAGE */
+
+        .hero-image{
+
+            flex:1;
+
+            min-width:300px;
+
+            text-align:center;
+        }
+
+        .hero-image img{
+
+            width:100%;
+
+            max-width:500px;
+
+            border-radius:30px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* MENU SECTION */
+
+        .menu-page{
+
+            padding:80px 8%;
+
+            background:#fffaf5;
+
+            text-align:center;
+        }
+
+        .menu-page h2{
+
+            font-size:45px;
+
+            margin-bottom:50px;
+
+            color:#222;
+        }
+
+        .menu-list{
+
+            max-width:900px;
+
+            margin:auto;
+
+            display:flex;
+
+            flex-direction:column;
+
+            gap:20px;
+        }
+
+        .menu-item{
+
+            background:white;
+
+            padding:25px;
+
+            border-radius:20px;
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+            transition:0.3s;
+        }
+
+        .menu-item:hover{
+
+            transform:translateY(-5px);
+        }
+
+        .menu-item h3{
+
+            color:#222;
+
+            margin-bottom:8px;
+        }
+
+        .menu-item p{
+
+            color:#666;
+        }
+
+        .menu-item span{
+
+            color:#ff7b00;
+
+            font-size:22px;
+
+            font-weight:bold;
+        }
+
+        /* SPECIAL SECTION */
+
+        .special{
+
+            padding:80px 8%;
+
+            background:white;
+
+            text-align:center;
+        }
+
+        .special h2{
+
+            font-size:45px;
+
+            margin-bottom:50px;
+
+            color:#222;
+        }
+
+        .special-container{
+
+            display:flex;
+
+            justify-content:center;
+
+            gap:30px;
+
+            flex-wrap:wrap;
+        }
+
+        .special-card{
+
+            width:300px;
+
+            background:#fffaf5;
+
+            border-radius:20px;
+
+            overflow:hidden;
+
+            box-shadow:0 8px 20px rgba(0,0,0,0.1);
+
+            transition:0.3s;
+        }
+
+        .special-card:hover{
+
+            transform:translateY(-10px);
+        }
+
+        .special-card img{
+
+            width:100%;
+
+            height:220px;
+
+            object-fit:cover;
+        }
+
+        .special-card h3{
+
+            margin:15px 0 10px;
+
+            color:#222;
+        }
+
+        .special-card p{
+
+            padding:0 20px 20px;
+
+            color:#666;
+        }
+
+        /* CONTACT */
+
+        .contact-page{
+
+            padding:80px 8%;
+
+            background:#222;
+
+            text-align:center;
+
+            color:white;
+        }
+
+        .contact-page h2{
+
+            font-size:45px;
+
+            margin-bottom:40px;
+        }
+
+        .contact-box{
+
+            max-width:500px;
+
+            margin:auto;
+
+            background:#333;
+
+            padding:40px;
+
+            border-radius:20px;
+        }
+
+        .contact-box p{
+
+            margin-bottom:15px;
+
+            font-size:18px;
+        }
+
+        .contact-box button{
+
+            margin-top:20px;
+
+            padding:14px 30px;
+
+            border:none;
+
+            background:#ff7b00;
+
+            color:white;
+
+            border-radius:40px;
+
+            cursor:pointer;
+
+            font-size:16px;
+
+            transition:0.3s;
+        }
+
+        .contact-box button:hover{
+
+            background:#e56700;
+        }
+
+        /* FOOTER */
+
+        footer{
+
+            background:#111;
+
+            color:white;
+
+            text-align:center;
+
+            padding:25px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:768px){
+
+            nav{
+
+                flex-direction:column;
+
+                gap:15px;
+            }
+
+            .hero{
+
+                text-align:center;
+            }
+
+            .hero-text h1{
+
+                font-size:50px;
+            }
+
+            .hero-text p{
+
+                font-size:18px;
+            }
+
+            .buttons{
+
+                justify-content:center;
+            }
+
+            .popup{
+
+                width:100%;
+            }
+
+            .menu-item{
+
+                flex-direction:column;
+
+                gap:15px;
+
+                text-align:center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <h1>Foodie Hub</h1>
+
+        <ul>
+
+            <li><a href="#home">Home</a></li>
+
+            <li><a href="#menu-section">Menu</a></li>
+
+            <li><a href="#contact-section">Contact</a></li>
+
+        </ul>
+
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-text">
+
+            <h1>Authentic Indian Taste</h1>
+
+            <p>
+                Experience rich Indian flavors, traditional spices,
+                and unforgettable dining moments at Foodie Hub.
+            </p>
+
+            <button onclick="orderNow()">
+                Order Now
+            </button>
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <button onclick="toggleMenu()">
+                    🍛 Menu
+                </button>
+
+                <button onclick="toggleAbout()">
+                    ✨ About
+                </button>
+
+                <button onclick="toggleOffer()">
+                    🎁 Offers
+                </button>
+
+            </div>
+
+            <!-- POPUPS -->
+
+            <div class="popup" id="menuBox">
+
+                <h3>Popular Indian Dishes</h3>
+
+                <p>🍛 Paneer Butter Masala</p>
+                <p>🍗 Chicken Biryani</p>
+                <p>🫓 Butter Naan</p>
+                <p>🥤 Mango Lassi</p>
+
+            </div>
+
+            <div class="popup" id="aboutBox">
+
+                <h3>About Us</h3>
+
+                <p>
+                    Foodie Hub serves authentic Indian food with
+                    traditional recipes and rich flavors.
+                </p>
+
+            </div>
+
+            <div class="popup" id="offerBox">
+
+                <h3>Special Offers</h3>
+
+                <p>🔥 20% OFF on Family Dinner</p>
+                <p>🥤 Free Lassi with Biryani</p>
+                <p>🍨 Free Gulab Jamun on Weekends</p>
+
+            </div>
+
+        </div>
+
+        <!-- IMAGE -->
+
+        <div class="hero-image">
+
+            <img src="food.jpg" alt="Indian Food">
+
+        </div>
+
+    </section>
+
+    <!-- MENU SECTION -->
+
+    <section class="menu-page" id="menu-section">
+
+        <h2>Our Indian Menu</h2>
+
+        <div class="menu-list">
+
+            <div class="menu-item">
+                <div>
+                    <h3>🥟 Veg Momos</h3>
+                    <p>Steamed momos served with spicy chutney</p>
+                </div>
+                <span>₹120</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🍢 Paneer Tikka</h3>
+                    <p>Grilled paneer cubes with Indian spices</p>
+                </div>
+                <span>₹240</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🍗 Chicken Tandoori</h3>
+                    <p>Smoky roasted chicken from clay oven</p>
+                </div>
+                <span>₹320</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🍛 Paneer Butter Masala</h3>
+                    <p>Creamy paneer curry with rich Indian spices</p>
+                </div>
+                <span>₹260</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🍗 Butter Chicken</h3>
+                    <p>Classic creamy chicken curry</p>
+                </div>
+                <span>₹340</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🥘 Veg Kolhapuri</h3>
+                    <p>Spicy Maharashtrian mixed vegetable curry</p>
+                </div>
+                <span>₹230</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🍚 Jeera Rice</h3>
+                    <p>Basmati rice flavored with cumin</p>
+                </div>
+                <span>₹140</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🍗 Chicken Biryani</h3>
+                    <p>Hyderabadi dum biryani with rich aroma</p>
+                </div>
+                <span>₹320</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🥘 Veg Thali</h3>
+                    <p>Complete Indian meal with roti and curry</p>
+                </div>
+                <span>₹280</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🫓 Butter Naan</h3>
+                    <p>Soft tandoori naan with butter topping</p>
+                </div>
+                <span>₹60</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🫓 Garlic Naan</h3>
+                    <p>Naan topped with garlic and herbs</p>
+                </div>
+                <span>₹80</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>☕ Masala Chai</h3>
+                    <p>Indian tea with aromatic spices</p>
+                </div>
+                <span>₹50</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🥤 Mango Lassi</h3>
+                    <p>Refreshing yogurt based Indian drink</p>
+                </div>
+                <span>₹90</span>
+            </div>
+
+            <div class="menu-item">
+                <div>
+                    <h3>🍨 Gulab Jamun</h3>
+                    <p>Soft sweet balls dipped in sugar syrup</p>
+                </div>
+                <span>₹120</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SPECIAL SECTION -->
+
+    <section class="special">
+
+        <h2>Chef Specials</h2>
+
+        <div class="special-container">
+
+            <div class="special-card">
+
+                <img src="food1.jpg">
+
+                <h3>Royal Thali</h3>
+
+                <p>
+                    Traditional Indian thali with authentic flavors.
+                </p>
+
+            </div>
+
+            <div class="special-card">
+
+                <img src="food2.jpg">
+
+                <h3>Tandoori Platter</h3>
+
+                <p>
+                    Smoky tandoori dishes with rich Indian spices.
+                </p>
+
+            </div>
+
+            <div class="special-card">
+
+                <img src="food3.jpg">
+
+                <h3>Indian Desserts</h3>
+
+                <p>
+                    Sweet traditional desserts served fresh.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section class="contact-page" id="contact-section">
+
+        <h2>Contact Us</h2>
+
+        <div class="contact-box">
+
+            <p>📍 Nagpur, Maharashtra</p>
+
+            <p>📞 +91 9876543210</p>
+
+            <p>📧 foodiehub@gmail.com</p>
+
+            <button onclick="bookTable()">
+                Book Table
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Foodie Hub | Authentic Indian Restaurant
+        </p>
+
+    </footer>
+
+    <script>
+
+        function hideAll(){
+
+            document.getElementById("menuBox").style.display = "none";
+            document.getElementById("aboutBox").style.display = "none";
+            document.getElementById("offerBox").style.display = "none";
+        }
+
+        function toggleMenu(){
+
+            let box = document.getElementById("menuBox");
+
+            if(box.style.display === "block"){
+
+                box.style.display = "none";
+            }
+
+            else{
+
+                hideAll();
+                box.style.display = "block";
+            }
+        }
+
+        function toggleAbout(){
+
+            let box = document.getElementById("aboutBox");
+
+            if(box.style.display === "block"){
+
+                box.style.display = "none";
+            }
+
+            else{
+
+                hideAll();
+                box.style.display = "block";
+            }
+        }
+
+        function toggleOffer(){
+
+            let box = document.getElementById("offerBox");
+
+            if(box.style.display === "block"){
+
+                box.style.display = "none";
+            }
+
+            else{
+
+                hideAll();
+                box.style.display = "block";
+            }
+        }
+
+        /* BOOK TABLE */
+
+        function bookTable(){
+
+            let name = prompt("Enter Your Name");
+
+            let people = prompt("How Many People?");
+
+            let date = prompt("Enter Booking Date");
+
+            let time = prompt("Enter Time");
+
+            if(name && people && date && time){
+
+                alert(
+                    "Table Booked Successfully! 🍽️\n\n" +
+
+                    "Name: " + name + "\n" +
+
+                    "People: " + people + "\n" +
+
+                    "Date: " + date + "\n" +
+
+                    "Time: " + time + "\n\n" +
+
+                    "Welcome to Foodie Hub 🍛"
+                );
+            }
+
+            else{
+
+                alert("Please Fill All Details");
+            }
+        }
+
+        /* ORDER NOW */
+
+        function orderNow(){
+
+            let food = prompt(
+                "What would you like to order?\n\n" +
+
+                "1. Paneer Butter Masala\n" +
+                "2. Chicken Biryani\n" +
+                "3. Butter Naan\n" +
+                "4. Veg Thali\n" +
+                "5. Mango Lassi"
+            );
+
+            let quantity = prompt("Enter Quantity");
+
+            let address = prompt("Enter Delivery Address");
+
+            if(food && quantity && address){
+
+                alert(
+                    "Order Placed Successfully! 🍴\n\n" +
+
+                    "Item: " + food + "\n" +
+
+                    "Quantity: " + quantity + "\n" +
+
+                    "Delivery Address: " + address + "\n\n" +
+
+                    "Your delicious food is on the way 🚚"
+                );
+            }
+
+            else{
+
+                alert("Please Fill All Details");
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
